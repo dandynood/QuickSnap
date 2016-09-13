@@ -16,6 +16,8 @@ namespace CardGames
 			SwinGame.LoadSoundEffectNamed ("SlapSame", "slap.wav");
 			SwinGame.LoadSoundEffectNamed ("Slap", "slap2.wav");
 
+			SwinGame.LoadFontNamed ("GameFont", "Chunkfive.otf", 24);	//load font
+
         }
 
 		/// <summary>
@@ -26,10 +28,12 @@ namespace CardGames
 		{
 			//Fetch the next batch of UI interaction
 			SwinGame.ProcessEvents();
+
 			if (SwinGame.KeyTyped (KeyCode.vk_SPACE))
 			{
 				myGame.Start ();
 			}
+
 			if (myGame.IsStarted)
 			{
 				if ( SwinGame.KeyTyped (KeyCode.vk_LSHIFT) && SwinGame.KeyTyped (KeyCode.vk_RSHIFT))
@@ -56,6 +60,7 @@ namespace CardGames
 		private static void DrawGame(Snap myGame)
 		{
 			SwinGame.DrawBitmap("cardsBoard.png", 0, 0);
+			SwinGame.DrawText ("" + myGame.Score(0), Color.White, "GameFont",0, 30);
 
 			// Draw the top card
 			Card top = myGame.TopCard;
